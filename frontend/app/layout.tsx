@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { IBM_Plex_Mono, Rajdhani } from "next/font/google";
 import "./globals.css";
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={`${display.variable} ${mono.variable} bg-black antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
