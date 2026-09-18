@@ -1,5 +1,12 @@
 import { Dashboard } from "@/components/Dashboard";
+import { Analytics } from "@vercel/analytics/next"
+
 
 export default function Page() {
-  return <Dashboard />;
+  return(
+    <>
+    <Dashboard />
+    <Analytics />
+    </>
+  )
 }
