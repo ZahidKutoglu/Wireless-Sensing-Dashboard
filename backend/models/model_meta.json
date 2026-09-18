@@ -1,0 +1,26 @@
+{
+  "model_name": "IsolationForest-ISAC-v1",
+  "features": [
+    "target_distance_m",
+    "target_velocity_mps",
+    "abs_velocity",
+    "rcs_dbsm",
+    "snr_db",
+    "throughput_mbps",
+    "log_ber",
+    "signal_quality",
+    "snr_residual",
+    "tput_residual",
+    "range_rate_inconsistency"
+  ],
+  "score_offset": 0.5361283578922958,
+  "score_scale": 65.02442014432927,
+  "degraded_threshold": 0.42,
+  "anomaly_threshold": 0.68,
+  "calibration": {
+    "raw_p50": 0.4686635406161861,
+    "raw_p95": 0.5361283578922958,
+    "raw_p99": 0.569961800699119,
+    "n_samples": 18000
+  }
+}
