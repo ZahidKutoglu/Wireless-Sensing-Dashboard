@@ -78,7 +78,9 @@ Vercel Python is serverless: there is no always-on process and **WebSockets are 
 1. New Vercel project → Root Directory: `backend`
 2. Framework: Other
 3. Deploy. You should get a URL like `https://isac-api-xxxx.vercel.app`
-4. Confirm `https://<backend>.vercel.app/health` returns `{"ok": true, ...}`
+4. Confirm these URLs (not just the site root in the browser):
+   - `https://<backend>.vercel.app/health` → `{"ok": true, ...}`
+   - `https://<backend>.vercel.app/api/isac/status` → live ISAC status
 
 Optional env:
 - `CORS_ORIGINS` — your frontend origin, e.g. `https://isac-app.vercel.app` (default is `*`)
