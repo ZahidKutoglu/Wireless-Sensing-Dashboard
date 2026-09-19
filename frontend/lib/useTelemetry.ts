@@ -28,6 +28,7 @@ export function useTelemetry() {
   const [connected, setConnected] = useState(false);
   const [injecting, setInjecting] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const wsRef = useRef<WebSocket | null>(null);
   const lastSeen = useRef(0);
 
@@ -62,9 +63,11 @@ export function useTelemetry() {
         if (Array.isArray(ledger)) setIncidents(ledger);
         setStatus(sys);
         setError(null);
+        if (Array.isArray(hist?.frames) && hist.frames.length > 0) setLoading(false);
       } catch (err) {
         if (!cancelled) {
           setConnected(false);
+          setLoading(false);
           setError(err instanceof Error ? err.message : "backend unreachable");
         }
       }
@@ -136,5 +139,15 @@ export function useTelemetry() {
   }, []);
 
   const latest = frames[frames.length - 1] ?? null;
-  return { frames, incidents, status, connected, latest, inject, injecting, error };
+  return {
+    frames,
+    incidents,
+    status,
+    connected,
+    latest,
+    inject,
+    injecting,
+    error,
+    loading: loading && !latest,
+  };
 }

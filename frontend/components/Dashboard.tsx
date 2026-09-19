@@ -1,7 +1,9 @@
 "use client";
 
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AnomalyFeed } from "@/components/AnomalyFeed";
+import { BootLoader } from "@/components/BootLoader";
 import { HudMetric } from "@/components/HudMetric";
 import { MissionHeader } from "@/components/MissionHeader";
 import { Panel } from "@/components/Panel";
@@ -16,7 +18,8 @@ function fmtBer(ber: number) {
 }
 
 export function Dashboard() {
-  const { frames, incidents, status, connected, latest, inject, injecting, error } = useTelemetry();
+  const { frames, incidents, status, connected, latest, inject, injecting, error, loading } =
+    useTelemetry();
   const [clock, setClock] = useState("--:--:--.---");
 
   useEffect(() => {
@@ -43,9 +46,11 @@ export function Dashboard() {
 
       {error ? (
         <div className="relative z-10 border-b border-kill/40 bg-kill/10 px-4 py-1 font-mono text-[11px] text-kill">
-          LINK ERROR · {error} · waiting for API on :8010
+          LINK ERROR · {error}
         </div>
       ) : null}
+
+      <AnimatePresence>{loading ? <BootLoader key="boot" /> : null}</AnimatePresence>
 
       <main className="relative z-10 grid min-h-0 flex-1 grid-cols-12 grid-rows-[auto_minmax(0,1fr)_auto] gap-2 p-2">
         <div className="col-span-12 grid grid-cols-2 gap-2 md:grid-cols-6">
